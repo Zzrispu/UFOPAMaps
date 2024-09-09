@@ -1,0 +1,564 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+@keyframes drop {
+    0% {
+      transform: translateY(-200px) scaleY(0.9);
+      opacity: 0;
+    }
+    5% {
+      opacity: 0.7;
+    }
+    50% {
+      transform: translateY(0px) scaleY(1);
+      opacity: 1;
+    }
+    65% {
+      transform: translateY(-17px) scaleY(0.9);
+      opacity: 1;
+    }
+    75% {
+      transform: translateY(-22px) scaleY(0.9);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(0px) scaleY(1);
+      opacity: 1;
+    }
+}
+
+* {
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    border: 0;
+    padding: 0;
+    user-select: none;
+}
+
+#map {
+    position: absolute;
+    top: 0;
+    z-index: 0;
+    height: 100%;
+    width: 100vw;
+    background-color: gray;
+}
+
+.yNHHyP-marker-view .IPAZAH-content-container>* {
+    pointer-events: all;
+}
+
+.hidden {
+    display: none;
+}
+
+.flex {
+    display: flex;
+}
+
+.offScreen {
+    transform: translate(-100%, 0);
+}
+
+.top-left-div {
+    display: flex;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+.bottom-left-div {
+    position: absolute;
+    bottom: 30px;
+    left: 10px;
+}
+
+.searchDiv {
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+}
+
+.searchBar {
+    background-color: #F5F3D0;
+    border: #4e572a solid 2px;
+    border-radius: 15px;
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+    z-index: 1;
+}
+::-webkit-search-cancel-button {
+    cursor: pointer;
+}
+
+.searchInput {
+    font-size: 15px;
+    border: none;
+    border-radius: 10px;
+    flex: 1;
+    outline: none;
+    padding: 5px 10px;
+    margin: 0 5px;
+    width: 100%;
+    height: 35px;
+}
+
+.searchRow {
+    align-self: center;
+    background-color: white;
+    border-radius: 0 0 5px 5px;
+    display: flex;
+    flex-direction: column;
+    max-height: 300px;
+    overflow-y: scroll;
+    width: 93%;
+}
+::-webkit-scrollbar {
+    display: none;
+}
+
+.searchRow ul {
+    padding: 5px;
+}
+
+.searchRow ul li {
+    font-size: 16px;
+    list-style: none;
+    cursor: pointer;
+    border-radius: 5px;
+    padding: 5px 10px;
+}
+
+.searchRow ul li:hover {
+    background-color: #F5F3D0;
+}
+
+.searchBar button {
+    margin: 0 5px;
+    background: transparent;
+    color: #86a138;
+    cursor: pointer;
+    font-size: 30px;
+}
+
+.searchBar button:hover {
+    transform: scale(1.2);
+}
+
+/* Markers */
+.gm-style .gm-style-iw-c {
+    padding: 0;
+    background-color: white;
+    border: #4e572a solid 2px;
+    border-radius: 10px;
+}
+.gm-style .gm-style-iw-tc::after {
+    background: #4e572a;
+}
+
+.markerContent {
+    display: flex;
+    flex-direction: column;
+    bottom: 10px;
+    padding: 10px 10px 0 10px;
+    position: relative;
+    transition: all 0.3s ease-out;
+    max-width: 350px;
+    max-height: 304px;
+    overflow: scroll;
+}
+
+.markerContent .dateInput {
+    align-self: flex-end;
+    border-radius: 10px;
+    background-color: #86a138;
+    cursor: text;
+    padding: 5px 5px 5px 10px;
+    color: white;
+    width: 130px;
+}
+.markerContent .dateInput::-webkit-calendar-picker-indicator {
+    background-color: white;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.markerIcon {
+    height: 35px;
+    width: 30px;
+    animation: drop 0.3s linear none;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.header i:hover {
+    transform: scale(1.2);
+    transition: all 0.2s;
+}
+
+.header h1 {
+    font-weight: 350;
+}
+
+.header .fa-circle-xmark {
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.markerContent .fa-trash-can {
+    cursor: pointer;
+    margin-top: 5px;
+    align-self: flex-end;
+    font-size: 20px;
+    color: red;
+}
+
+.aulas {
+    border: 1px #4e572a solid;
+    border-collapse: collapse;
+    margin: 10px 0;
+}
+.aulas .hdr {
+    background-color: #4e572a;
+    border-radius: 10px;
+    color: white;
+}
+.aulas .hdr td{
+    font-weight: bold;
+}
+.aulas td {
+    padding: 5px 0;
+    text-align: center;
+    max-height: 30px;
+}
+
+/* routes inicio */
+.routesRow {
+    align-self: center;
+    background-color: white;
+    border-radius: 0 0 5px 5px;
+    width: 93%;
+}
+
+.routeBox {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 10px;
+}
+
+.originDiv, .destinationDiv {
+    display: flex;
+    flex-direction: column;
+    margin-left: 5px;
+    position: relative;
+    width: 100%;
+}
+
+.originDiv input, .destinationDiv input {
+    border-bottom: #4e572a solid 2px;
+    font-size: 17px;
+    outline: none;
+    padding: 0 5px;
+    width: 100%;
+}
+
+.dropList {
+    background-color: white;
+    border: #4e572a solid 2px;
+    border-radius: 0 0 5px 5px;
+    position: absolute;
+    align-self: center;
+    top: 100%;
+    width: 99%;
+    z-index: 1;
+}
+
+.dropList ul {
+    list-style: none;
+    padding: 2px 5px;
+}
+
+.dropList ul li {
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 17px;
+    margin-bottom: 2px;
+    padding: 2px 5px;
+}
+
+.dropList ul li:hover {
+    background-color: #F5F3D0;
+}
+
+.footer {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 10px;
+}
+
+.footer .fa-circle-xmark {
+    background-color: transparent;
+    color: #86a138;
+    cursor: pointer;
+    font-size: 20px;
+}
+.footer .fa-circle-xmark:hover {
+    transform: scale(1.25) rotate(5deg);
+    transition: all 0.2s;  
+}
+
+.footer .tracarRota {
+    background-color: #86a138;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    font-size: 15px;
+    padding: 3px 5px;
+}
+.footer .tracarRota:hover {
+    transform: scale(1.1) rotate(1deg);
+    transition: all 0.2s;  
+}
+
+/* Botão de centralizar */
+.centralizar-b {
+    background-color: #F5F3D0;
+    border: #4e572a solid 2px;
+    border-radius: 50%;
+}
+
+.fa-crosshairs {
+    background-color: transparent;
+    color: #86a138;
+    cursor: pointer;
+    font-size: 35px;
+    padding: 5px;
+}
+.fa-crosshairs:hover, #getLocationB:hover {
+    transform: scale(1.2);
+    transition: all 0.2s ease-out;
+}
+
+/* SideBar */
+.sbMenu {
+    background-color: #F5F3D0;
+    border: #4e572a solid 2px;
+    border-radius: 50%;
+    color: #86a138;
+    cursor: pointer;
+    display: flex;
+    font-size: 25px;
+    height: fit-content;
+    justify-content: center;
+    align-items: center;
+    margin-right: 10px;
+    padding: 10px;
+    width: fit-content;
+}
+.sbMenu > i:hover {
+    transform: scale(1.2);
+}
+
+.sideBar {
+    background-color: #4e572a;
+    color: white;
+    height: 100%;
+    max-height: 100%;
+    position: absolute;
+    width: 400px;
+    top: 0;
+    transition: all ease-in-out 0.3s;
+    overflow: scroll;
+    z-index: 1;
+}
+.sideBar .sbHeader {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    justify-content: space-around;
+    margin: 10px 0 20px 0;
+}
+.sbHeader h1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.sbHeader h1 img {
+    height: 60px;
+}
+.sbHeader i {
+    padding-top: 10px;
+    font-size: 25px;
+    cursor: pointer;
+}
+.sbHeader i:hover {
+    transform: scale(1.2);
+}
+
+.sbDropDown {
+    border-top: #86a138 solid 2px;
+}
+.sbDDTitle {
+    align-items: center;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 20px;
+}
+
+.dlClosed {
+    max-height: 0 !important;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.sbInst {
+    list-style-type: none;
+    background-color: #86a138;
+    transition: all 0.2s ease;
+}
+.sbInst li .sbIntstName {
+    cursor: pointer;
+    display: flex;
+    font-size: 18px;
+    justify-content: space-between;
+    padding: 5px 22px;
+}
+.sbIntstName:hover {
+    background-color: #4e5e1f;
+}
+
+.sbCursos {
+    list-style-type: none;
+    background-color: #F5F3D0;
+    color: black;
+    font-size: 16px;
+    transition: all 0.2s ease;
+}
+.sbCursoName:hover {
+    cursor: pointer;
+    background-color: #d4d3b5;
+}
+.sbCursoName {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 24px;
+}
+.sbAulas {
+    background-color: white;
+    list-style-type: none;
+    max-height: 50vh;
+    overflow: scroll;
+    transition: all 0.2s ease;
+}
+.sbAulas li {
+    padding: 5px 20px;
+    display: flex;
+    justify-content: space-between;
+}
+.sbAulas li:hover {
+    background-color: rgb(223, 223, 223);
+}
+.sbAulas li i {
+    font-size: 30px;
+    color: #86a138;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    -webkit-text-stroke: #4e572a 1px;
+}
+.sbAulas li i:hover {
+    cursor: pointer;
+    transform: scale(1.2);
+}
+.sbAulas li div {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    align-items: center;
+}
+.sbAulas li div h1 {
+    text-align: center;
+    font-size: 16px;
+}
+.sbAulas li div h2 {
+    font-size: 14px;
+    font-weight: 600;
+}
+.sbAulas li div span {
+    align-self: flex-end;
+    font-size: 12px;
+}
+
+.eventName {
+    font-weight: 500;
+    max-height: 20px;
+    overflow-x: hidden;
+}
+.eventName:hover {
+    max-height: fit-content;
+}
+
+.eventLi {
+    display: flex;
+}
+.eventLi:hover {
+    background-color: #d4d3b5;
+}
+
+/* infoWindow Content */
+.iwCli {
+    display: flex;
+    border:#4e572a 1px solid;
+    font-size: 16px;
+    padding: 5px 7px;
+    align-items: center;
+    border-radius: 5px;
+    font-weight: 500;
+    margin-top: 3px;
+}
+.iwCli:hover {
+    background-color: lightgray;
+}
+.iwCli i {
+    color: #86a138;
+    -webkit-text-stroke: #4e572a 1px;
+    cursor: pointer;
+    font-size: 22px;
+    align-self: flex-start;
+}
+.iwCli i:hover {
+    transform: scale(1.2);
+    transition: all 0.2s;
+}
+.iwCli span {
+    flex: 1;
+    text-align: center;
+}
+
+.sliderArrow {
+    position:absolute;
+    top:50%;
+    font-size:20px;
+    color:#86a138;
+    cursor: pointer;
+    -webkit-text-stroke:#4e572a 0.5px;
+}
+.sliderArrow:hover {
+    color:white;
+    transform: scale(1.2);
+    transition: all 0.2s;
+}
+
+@media screen and (max-width: 600px) {
+    .top-left-div {
+        width: 95%;
+    }
+    .searchDiv {
+        width: 100%;
+    }
+}

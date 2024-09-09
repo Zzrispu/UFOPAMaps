@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log In</title>
+    <link rel="stylesheet" href="./styles/login.css">
+</head>
+
+<body>
+    <div class="left-side">
+        <div class="formulario">
+            <h2>UFOPA Maps</h2>
+            <h4>Bem vindo! Preencha seus dados para acessar o DashBoard.</h4>
+            <form action="/authenticate" method="post">
+                <label for="username">Usuário</label>
+                <input type="text" name="username" id="username" placeholder="Ex: Fulano de Tal" required
+                    autocomplete="off">
+                <% if (error==1) { %>
+                    <span>Usuário não encontrado.</span>
+                <% } %>
+                <label for="password">Senha</label>
+                <input type="password" name="password" id="password" placeholder="min: 6 | max: 16" required minlength="6" maxlength="16">
+                <% if (error==2) { %>
+                    <span>Senha incorreta. Tente novamente.</span>
+                <% } %>
+                <div class="lembrar-esqueci">
+                    <div>
+                        <input type="checkbox" id="remember_me">
+                        <label for="remember_me">Lembrar de mim</label>
+                    </div>
+                    <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley">Esqueci minha senha</a>
+                </div>
+                <button type="submit">Entrar</button>
+            </form>
+        </div>
+    </div>
+    <div class="ufopamaps_bg">
+    </div>
+</body>
+
+</html>

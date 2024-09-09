@@ -1,0 +1,115 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+    font-family: 'Montserrat', sans-serif;
+    padding: 0;
+    margin: 0;
+    border: none;
+}
+
+body {
+    display: flex;
+}
+
+.left-side {
+    background-color: #005500;
+    width: 50vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ufopamaps_bg {
+    background: #B09750 url('../images/ufopamaps_bg.png') no-repeat;
+    background-size: cover;
+    width: 50vw;
+    height: 100vh;
+}
+
+.formulario {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: #003800 10px 10px 5px;
+    min-height: 50%;
+    width: 50%;
+    color: #003800;
+}
+
+.formulario h2 {
+    font-size: 34px;
+    letter-spacing: 1.25px;
+    margin-top: 10px;
+}
+
+.formulario h4 {
+    font-size: 14px;
+    margin-bottom: 20px;
+    font-weight: normal;
+}
+
+.lembrar-esqueci {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+.lembrar-esqueci div {
+    display: flex;
+    align-items: center;
+}
+.lembrar-esqueci div input {
+    margin: 0;
+}
+.lembrar-esqueci div label {
+    font-size: 14px;
+    font-weight: normal;
+}
+.lembrar-esqueci a {
+    text-decoration: none;
+    color: #003800;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+form label {
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 1.25px;
+}
+
+form input {
+    border-bottom: 2px darkgreen solid;
+    margin-bottom: 18px;
+    font-size: 14px;
+    padding: 3px 8px 1px 8px;
+    outline: none;
+    border-radius: 5px;
+    letter-spacing: 1.25px;
+    font-weight: 500;
+    height: 28px;
+}
+form input::placeholder {
+    color: darkgreen;
+    font-size: 14px;
+}
+form input:focus {
+    background-color: darkgreen;
+    color: white;
+}
+
+form button {
+    background-color: darkgreen;
+    color: white;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 5px;
+    height: 35px;
+}

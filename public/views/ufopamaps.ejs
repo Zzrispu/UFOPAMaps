@@ -1,0 +1,103 @@
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" type="text/css" href="../styles/ufopamaps.css">
+  <script src="https://kit.fontawesome.com/d4228d7768.js" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/read-excel-file@5.x/bundle/read-excel-file.min.js"></script>
+
+  <title>UFOPA Maps</title>
+  <link rel="icon" type="image/x-icon" href="../src/favicon.ico">
+</head>
+
+<body>
+  <div id="map"></div>
+
+  <div class="top-left-div">
+    <div class="sbMenu" onclick="showSideBar()">
+      <i class="fa-solid fa-bars-staggered"></i>
+    </div>
+
+    <div class="searchDiv">
+
+      <div class="searchBar">
+        <button class="fa-solid fa-magnifying-glass-location"></button>
+        <input class="searchInput" id="search_input" type="search" placeholder="Pesquisar..." autocomplete="off">
+        <button class="fa-solid fa-route" onclick="toggleRoutesRow()"></button>
+      </div>
+
+      <div class="searchRow"></div>
+
+      <div class="routesRow hidden">
+        <div class="routeBox">
+          <span>Origem:</span>
+          <div class="originDiv">
+            <input type="text" id="originInput" autocomplete="off">
+          </div>
+          <button style="font-size: 20px;color: #86a138;background-color: transparent;border: none;cursor: pointer;" id="getLocationB"><i class="fa-solid fa-location-crosshairs"></i></button>
+        </div>
+        <div class='routeBox'>
+          <span>Destino:</span>
+          <div class="destinationDiv">
+            <input type="text" id="destinationInput" autocomplete="off">
+          </div>
+        </div>
+        <div class="footer">
+          <button class="fa-regular fa-circle-xmark" onclick="cleanRoutesRow()"></button>
+          <button class="tracarRota">Traçar Rota</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="bottom-left-div">
+
+    <div class="centralizar-b">
+      <button class="fa-solid fa-crosshairs" onclick="centralize()"></button>
+    </div>
+
+  </div>
+
+  <div class="sideBar offScreen" id="sideBar">
+    <div class="sbHeader">
+      <h1><img src="./src/brasao.png" alt="UFOPA Logo">UFOPA Maps</h1>
+      <i class="fa-solid fa-xmark" onclick="hideSideBar()"></i>
+    </div>
+
+    <div class="sbDropDown">
+      <div class="sbDDTitle" onclick="openDropList(this.nextElementSibling)">
+        <h2>Aulas</h2>
+        <i class="fa-solid fa-chevron-down"></i>
+      </div>
+      <ul class="sbInst" id="sbInstitutos"></ul>
+    </div>
+
+    <div class="sbDropDown">
+      <dib class="sbDDTitle" onclick="openDropList(this.nextElementSibling)">
+        <h2>Eventos</h2>
+        <i class="fa-solid fa-chevron-down"></i>
+      </dib>
+      <ul id="eventsDL" class="sbDDList sbCursos"></ul>
+    </div>
+  </div>
+  
+  <script>
+    (g=>{var h,a,k,p="The Google Maps JavaScript API",c="google",l="importLibrary",q="__ib__",m=document,b=window;b=b[c]||(b[c]={});var d=b.maps||(b.maps={}),r=new Set,e=new URLSearchParams,u=()=>h||(h=new Promise(async(f,n)=>{await (a=m.createElement("script"));e.set("libraries",[...r]+"");for(k in g)e.set(k.replace(/[A-Z]/g,t=>"_"+t[0].toLowerCase()),g[k]);e.set("callback",c+".maps."+q);a.src=`https://maps.${c}apis.com/maps/api/js?`+e;d[q]=f;a.onerror=()=>h=n(Error(p+" could not load."));a.nonce=m.querySelector("script[nonce]")?.nonce||"";m.head.append(a)}));d[l]?console.warn(p+" only loads once. Ignoring:",g):d[l]=(f,...n)=>r.add(f)&&u().then(()=>d[l](f,...n))})({
+      key: '<%- apiKey %>',
+      v: "weekly",
+    });
+  </script>
+  
+  <script>
+    const classes = JSON.parse('<%- JSON.stringify(classes) %>');
+    const events = JSON.parse('<%- JSON.stringify(events) %>');
+    const locations = JSON.parse('<%- JSON.stringify(locations) %>');
+  </script>
+  <script type="module" src="../scripts/ufopamaps.js"></script>
+
+</body>
+
+</html>

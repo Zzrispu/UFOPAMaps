@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../styles/dashboard.css">
+    <title>DashBoard</title>
+</head>
+<body>
+    <% if (classes) { %>
+        <div class="form-conteiner">
+            <h3>Classes</h3>
+            <% classes.forEach((clss) => { %>
+            <form action="/dashboard/save" method="post">
+                <div class="form-elements-conteiner">
+                    <label for="instituto">Instituto:</label>
+                    <input type="text" name="instituto" id="instituto" value="<%= clss.instituto %>" required disabled autocomplete="off">
+                </div>
+                <div class="form-elements-conteiner">
+                    <label for="graduacoes">Graduações:</label>
+                    <input type="text" name="graduacoes" id="graduacoes" value="<%= clss.graduacoes %>" disabled autocomplete="off">
+                </div>
+                <div class="form-buttons-conteiner">
+                    <button type="button">Editar</button>
+                    <button type="submit" disabled>Salvar</button>
+                    <button type="button" disabled>Remover</button>
+                </div>
+            </form>
+            <% }) %>
+        </div>
+    <% } %>
+    <% if (events) { %>
+        <div class="form-conteiner">
+            <h3>Eventos</h3>
+            <% events.forEach((event) => { %>
+                <form action="/dashboard/save" method="post">
+                    <div class="form-elements-conteiner">
+                        <label for="name">Nome:</label>
+                        <input type="text" name="name" id="name" value="<%= event.name %>" required disabled autocomplete="off">
+                    </div>
+                    <div class="form-elements-conteiner">
+                        <label for="date">Data:</label>
+                        <input type="text" name="date" id="date" value="<%= event.date %>" disabled autocomplete="off">
+                    </div>
+                    <div class="form-elements-conteiner">
+                        <label for="location">Local:</label>
+                        <input type="text" name="location" id="location" value="<%= event.location %>" disabled autocomplete="off">
+                    </div>
+                    <div class="form-elements-conteiner">
+                        <label for="url">URL:</label>
+                        <input type="text" name="url" id="url" value="<%= event.url %>" disabled autocomplete="off">
+                    </div>
+                    <div class="form-buttons-conteiner">
+                        <button type="button">Editar</button>
+                        <button type="submit" disabled>Salvar</button>
+                        <button type="button" disabled>Remover</button>
+                    </div>
+                </form>
+            <% }) %>
+        </div>
+    <% } %>
+    <% if (locations) { %>
+        <div class="form-conteiner">
+            <h3>Localizações</h3>
+            <% locations.forEach((lct) => { %>
+                <form action="/dashboard/edit" method="post">
+                    <div class="form-elements-conteiner">
+                        <label for="block">Bloco:</label>
+                        <input type="text" name="block" id="block" value="<%= lct.block %>" required disabled autocomplete="off">
+                    </div>
+                    <div class="form-elements-conteiner">
+                        <label for="imgs">Imagens:</label>
+                        <input type="number" name="imgs" id="imgs" value="<%= lct.imgs %>" disabled min="0">
+                    </div>
+                    <div class="form-elements-conteiner">
+                        <label for="polygon">Polígono:</label>
+                        <input type="text" name="polygon" id="polygon" value="<%= lct.polygon %>" disabled autocomplete="off">
+                    </div>
+                    <div class="form-elements-conteiner">
+                        <label for="rooms">Salas:</label>
+                        <input type="text" name="rooms" id="rooms" value="<%= lct.rooms %>" disabled autocomplete="off">
+                    </div>
+                    <div class="form-buttons-conteiner">
+                        <button type="button">Editar</button>
+                        <button type="submit" disabled>Salvar</button>
+                        <button type="button" disabled>Remover</button>
+                    </div>
+                </form>
+            <% }) %>
+        </div>
+    <% } %>
+</body>
+</html>
