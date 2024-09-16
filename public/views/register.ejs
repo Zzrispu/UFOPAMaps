@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Registrar</title>
+        <link rel="stylesheet" href="./styles/login.css">
+    </head>
+    
+    <body>
+        <div class="left-side">
+            <div class="formulario">
+                <h2>UFOPA Maps</h2>
+                <h4>Primeira vez? Crie uma conta e desfrute de novas funcionalidades!</h4>
+                <form id="form">
+                    <label for="username" class="textLabel">Usuário</label>
+                    <input type="text" name="username" id="username" placeholder="Ex: Fulano de Tal" required autocomplete="off">
+                    <span id="userSpan" style="visibility: hidden;">Nome de usuário já registrado.</span>
+    
+                    <label for="password" class="textLabel">Senha</label>
+                    <input type="password" id="password" placeholder="min: 6 | max: 16" required minlength="6" maxlength="16">
+    
+                    <label for="c-password" class="textLabel">Confirme a senha</label>
+                    <input type="password" name="password" id="c-password" placeholder="min: 6 | max: 16" required minlength="6" maxlength="16">
+                    <span id="pwSpan" style="visibility: hidden;">Senhas não conferem.</span>
+    
+                    <button type="submit">Cadastrar</button>
+                </form>
+                <span>Já possuí uma conta? <a href="/login">Entre aqui.</a></span>
+            </div>
+        </div>
+        <div class="ufopamaps_bg">
+        </div>
+    
+        <script type="module" src="../scripts/register.script.js"></script>
+    </body>
+</html>

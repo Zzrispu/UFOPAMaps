@@ -13,16 +13,16 @@
         <div class="formulario">
             <h2>UFOPA Maps</h2>
             <h4>Bem vindo! Preencha seus dados para acessar o DashBoard.</h4>
-            <form action="/authenticate" method="post">
-                <label for="username">Usuário</label>
+            <form action="/auth" method="post">
+                <label for="username" class="textLabel">Usuário</label>
                 <input type="text" name="username" id="username" placeholder="Ex: Fulano de Tal" required
                     autocomplete="off">
-                <% if (error==1) { %>
+                <% if(error == 1) { %>
                     <span>Usuário não encontrado.</span>
                 <% } %>
-                <label for="password">Senha</label>
+                <label for="password" class="textLabel">Senha</label>
                 <input type="password" name="password" id="password" placeholder="min: 6 | max: 16" required minlength="6" maxlength="16">
-                <% if (error==2) { %>
+                <% if(error == 2) { %>
                     <span>Senha incorreta. Tente novamente.</span>
                 <% } %>
                 <div class="lembrar-esqueci">
@@ -34,6 +34,7 @@
                 </div>
                 <button type="submit">Entrar</button>
             </form>
+            <span>Ainda não possui uma conta?<a href="/register">Registre aqui.</a></span>
         </div>
     </div>
     <div class="ufopamaps_bg">

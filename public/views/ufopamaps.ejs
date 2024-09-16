@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="pt-br">
 
 <head>
@@ -15,21 +16,23 @@
 <body>
   <div id="map"></div>
 
-  <div class="top-left-div">
-    <div class="sbMenu" onclick="showSideBar()">
-      <i class="fa-solid fa-bars-staggered"></i>
-    </div>
+  <div class="top-div">
 
-    <div class="searchDiv">
+    <div class="search-conteiner" style="display: flex; flex-direction: column; max-width: 500px; flex: 1;">
 
       <div class="searchBar">
-        <button class="fa-solid fa-magnifying-glass-location"></button>
-        <input class="searchInput" id="search_input" type="search" placeholder="Pesquisar..." autocomplete="off">
+
+        <button class="fa-solid fa-bars-staggered" onclick="showSideBar()"></button>
+
+        <div class="searchInput">
+          <input id="search_input" type="search" placeholder="Pesquisar..." autocomplete="off">
+          <i class="fa-solid fa-magnifying-glass-location"></i>
+        </div>
         <button class="fa-solid fa-route" onclick="toggleRoutesRow()"></button>
       </div>
-
+  
       <div class="searchRow"></div>
-
+  
       <div class="routesRow hidden">
         <div class="routeBox">
           <span>Origem:</span>
@@ -49,6 +52,10 @@
           <button class="tracarRota">Traçar Rota</button>
         </div>
       </div>
+    </div>
+
+    <div class="userButton-div" id="userDiv">
+      <button id="userButton" onclick="openUserPanel(this)"></button>
     </div>
 
   </div>
@@ -95,8 +102,9 @@
     const classes = JSON.parse('<%- JSON.stringify(classes) %>');
     const events = JSON.parse('<%- JSON.stringify(events) %>');
     const locations = JSON.parse('<%- JSON.stringify(locations) %>');
+    const user = JSON.parse('<%- JSON.stringify(user) %>');
   </script>
-  <script type="module" src="../scripts/ufopamaps.js"></script>
+  <script type="module" src="../scripts/ufopamaps.script.js"></script>
 
 </body>
 

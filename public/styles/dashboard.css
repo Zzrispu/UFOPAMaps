@@ -39,8 +39,33 @@ body {
 }
 .form-elements-conteiner input {
     flex: 1;
+    padding: 2px 4px;
 }
 
 .form-buttons-conteiner {
     align-self: flex-end;
+}
+.form-buttons-conteiner button {
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 2px 4px;
+}
+.form-buttons-conteiner button:disabled {
+    cursor: not-allowed;
+}
+
+.form-array-conteiner {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 5px;
+}
+
+.form-arrayElement-conteiner {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding-left: 4px;
+    border: 1px black solid;
+    margin-bottom: 5px;
 }
