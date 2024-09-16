@@ -1,21 +1,21 @@
 import express from 'express';
+import session from 'express-session';
 import mongoose from 'mongoose';
-import dotenv from 'dotenv';
-import bcrypt from 'bcrypt';
+import { configDotenv } from 'dotenv';
+
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
-import User from './models/users.models.js';
-import Classes from './models/classes.model.js';
-import Events from './models/events.model.js';
-import Locations from './models/locations.model.js';
 
-dotenv.config();
+import homeRouter from './routes/home.route.js';
+import authRouter from './routes/auth.route.js';
+import dashBoardRouter from './routes/dashboard.route.js';
+import registerRouter from './routes/register.route.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const app = express();
 
-let log_in_err = 0;
+configDotenv();
 
 mongoose.connect(process.env.MONGODB_URL)
     .then(() => {
@@ -25,50 +25,26 @@ mongoose.connect(process.env.MONGODB_URL)
         console.log(`[ERROR]: ${error}`)
     });
 
-app.use(express.json());
-app.use(express.urlencoded({ extended:true }));
-app.use(express.static(__dirname + '/public'));
 app.set('view engine', 'ejs');
 app.set('views', './public/views');
 
-app.get('/', async (request, response) => {
-    const classes = await Classes.find({})
-    const events = await Events.find({})
-    const locations = await Locations.find({})
-    response.render('ufopamaps', { apiKey: process.env.GOOGLE_MAPS_API_KEY, classes, events, locations });
-});
-
-app.get('/login', async (request, response) => {
-    response.render('login', { error: log_in_err });
-    log_in_err = 0;
-});
-
-app.post('/authenticate', async (request, response) => {
-    const user = await User.findOne({
-        name: request.body.username,
-    });
-    if (!user) {
-        log_in_err = 1;
-        return response.redirect('/login');
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static(__dirname + '/public'));
+app.use(session({
+    secret: process.env.SESSION_SECRET,
+    saveUninitialized: false,
+    resave: false,
+    cookie: {
+        maxAge: 6000 * 60 * 2
     }
+}));
 
-    const isHashedPassword = bcrypt.compareSync(request.body.password, user.password);
-    if (isHashedPassword) {
-        return response.redirect('/dashboard');
-    }
-    else {
-        log_in_err = 2;
-        return response.redirect('/login');
-    }
-})
+app.use(homeRouter);
+app.use(authRouter);
+app.use(dashBoardRouter);
+app.use(registerRouter);
 
-app.get('/dashboard', async (request, response) => {
-    const classes = await Classes.find({});
-    const events = await Events.find({});
-    const locations = await Locations.find({});
-    response.render('dashboard', { classes, events, locations });
-});
-
-app.listen( process.env.PORT || 3000, () => {
+app.listen(process.env.PORT || 3000, () => {
     console.log('Site no ar.');
 });
