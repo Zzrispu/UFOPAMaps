@@ -24,6 +24,11 @@ router.post('/auth', async (request, response) => {
     }
 });
 
+router.get('/logout', async (request, response) => {
+    request.session.userId = null;
+    return response.redirect('/');
+})
+
 router.get('/login', async (request, response) => {
     response.render('login', { error: request.session.error });
     request.session.error = 0;

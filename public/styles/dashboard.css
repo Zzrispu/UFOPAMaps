@@ -7,14 +7,6 @@
     border: none;
 }
 
-body {
-    background-color: lightgrey;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
 .form-conteiner {
     background-color: white;
     border-radius: 5px;
@@ -49,6 +41,7 @@ body {
     border-radius: 5px;
     cursor: pointer;
     padding: 2px 4px;
+    margin-left: 10px;
 }
 .form-buttons-conteiner button:disabled {
     cursor: not-allowed;
@@ -68,4 +61,28 @@ body {
     padding-left: 4px;
     border: 1px black solid;
     margin-bottom: 5px;
+}
+
+.sb-ul {
+    border-bottom: #86a138 solid 2px;
+}
+
+.sb-ul li {
+    height: 40px;
+    border-radius: 10px;
+    margin-bottom: 6px;
+    font-size: larger;
+    letter-spacing: 4px;
+    padding: 0 6px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.sb-ul li i {
+    width: 30px;
+}
+
+.sb-ul li:hover {
+    background-color: #86a138;
 }

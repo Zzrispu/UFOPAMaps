@@ -30,4 +30,16 @@ router.get('/', async (request, response) => {
     response.render('ufopamaps', { apiKey: process.env.GOOGLE_MAPS_API_KEY, classes, events, locations, user });
 });
 
+router.post('/db/:collection', async (request, response) => {
+    if (request.params.collection === 'events') {
+        const eventName = request.body.eventName;
+        if (!eventName) return response.status(400).send({ msg: 'error', detail: 'No filter aplied' });
+
+        const event = await Events.findOne({ name: eventName });
+        if (!event) return response.status(400).send({ msg: 'error', detail: 'No Event found' });
+        else return response.send(event);
+    }
+    else return response.status(404).send({ msg: 'error', detail: 'No Colletion found' });
+})
+
 export default router;

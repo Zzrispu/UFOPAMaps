@@ -149,23 +149,33 @@ document.addEventListener('DOMContentLoaded', async () => {
     window.openUserPanel = (button) => {
         const div = button.parentElement;
 
-        div.style.height = 'fit-content';
-        div.style.borderRadius = '5px';
+        div.style.borderRadius = '10px';
         div.style.flexDirection = 'column';
-        div.style.height = '180px';
-        div.style.padding = '10px';
+        div.style.height = '200px';
+        div.style.padding = '5px';
 
         if (user.username === 'Guest') {
             div.innerHTML = `<img src="https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg" alt="userPicture">` +
                 `<h4>${user.username}</h4>` +
-                `<a href="/login">Entar</a>` +
-                `<a href="/register">Cadastrar</a>`;
+                `<a href="/login" style="margin-top: 10px">Entar</a>` +
+                `<a href="/register" style="margin-top: 10px">Cadastrar</a>`;
         }
         else {
+            const checked = () => {
+                if (isEditMode) return `checked`
+                else return ``
+            };
             div.innerHTML = `<img src="https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg" alt="userPicture">` +
                 `<h4>${user.username}</h4>` +
                 `<div class="userInfo"><span>Pontos:</span><span>${user.points}</span></div>` +
-                `<div class="userInteractionsButtons"><i onclick="toggleEditMode()" class="fa-solid fa-pen-to-square"></i><i class="fa-solid fa-ranking-star"></i></div>`;
+                `<div class="userInteractionsButtons">` +
+                `<div style="flex-direction: column; width: fit-content; position: relative; margin: 0">` +
+                `<label for="checkEdit" class="fa-solid fa-pen-to-square"></label><input type="checkbox" id="checkEdit" onchange="toggleEditMode()" style="display: none" ${checked()}>` +
+                `<label for="checkEdit" class="editToggle"></label>` +
+                `</div>` +
+                `<i class="fa-solid fa-ranking-star"></i>` +
+                `</div>` +
+                `<a href="/logout">Sair</a>`;
         };
     };
 
@@ -174,6 +184,8 @@ document.addEventListener('DOMContentLoaded', async () => {
             isEditMode = true;
         }
         else {
+            const editButton = document.getElementById('editIcon');
+            editButton.remove();
             isEditMode = false;
         };
     };
@@ -362,7 +374,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     // Funções complexas - Final
 
     // Eventos - início
-    document.addEventListener('click', (e) => {
+    document.addEventListener('click', (e) => { // *click* *click* *click*
         const userDiv = document.getElementById('userDiv');
 
         if (e.target != userDiv && !userDiv.contains(e.target) && e.target.id != 'userButton') {
@@ -374,18 +386,70 @@ document.addEventListener('DOMContentLoaded', async () => {
             replaceDiv.firstElementChild.innerHTML = user.username.charAt(0).toLocaleUpperCase();
         };
 
-        if (isEditMode) {
+        if (isEditMode) { // Handler do modo edição
             const sbConteiners = sideBar.querySelectorAll('.sbDropDown');
-            sbConteiners.forEach(element => {
+            sbConteiners.forEach(async element => {
                 if (element.contains(e.target)) {
                     let editIcon = document.getElementById('editIcon');
                     if (!editIcon) {
                         editIcon = document.createElement('i');
                         editIcon.id = 'editIcon'
                         editIcon.setAttribute('class', 'fa-solid fa-pen-to-square');
-                        editIcon.setAttribute('style', 'position: absolute; top: 5px; right: 5px; border: 1px white solid');
+                        editIcon.setAttribute('style', 'position: absolute; top: 5px; right: 5px; box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; width: 16px; font-size: 16px; border-radius: 50%');
                     }
                     e.target.closest('li').append(editIcon);
+                    if (e.target == editIcon) {
+                        const background = document.createElement('div');
+                        background.setAttribute('style', 'width: 100vw; height: 100vh; background-color: rgba(0, 0, 0, 0.6); position: relative; z-index: 2; display: flex; justify-content: center; align-items: center;');
+                        document.getElementsByTagName('body').item(0).append(background);
+                        if (editIcon.closest('li').classList.contains('eventLi')) {
+                            const event = await fetch('/db/events', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify({ eventName: `${editIcon.closest('li').getElementsByClassName('eventName').item(0).innerHTML}` })
+                            }).then(result => result.json()).then((data) => { return data; }).catch(error => { console.error('Error:', error); });
+
+                            const form = document.createElement('form');
+                            form.classList.add('editForm');
+                            form.innerHTML =
+                                `<label for="name">Nome</label>` +
+                                `<input type="text" id="name" name="name" value="${event.name}">` +
+                                `<label for="date">Data</label>` +
+                                `<input type="date" id="date" name="date" value="${event.date}">` +
+                                `<label for="location">Local</label>` +
+                                `<input type="text" id="location" name="location" value="${event.location}">` +
+                                `<label for="url">Link</label>` +
+                                `<input type="url" id="url" name="url" value="${event.url}">` +
+                                `<div><input type="reset" value="Cancelar"><input type="submit" value="Enviar"></div>`;
+                            
+                            form.addEventListener('submit', async (e) => {
+                                e.preventDefault();
+
+                                const data = Object.fromEntries(new FormData(form).entries());
+                                data.target_id = event._id
+                                console.log(data);
+
+                                await fetch('/api/events-requests', {
+                                    method: 'POST',
+                                    headers: {
+                                        'Content-Type': 'application/json'
+                                    },
+                                    body: JSON.stringify(data),
+                                }).then(response => response).catch(error => console.log('[ERROR]: ' + error));
+
+                                background.remove();
+                                alert('Sua edição foi mandada para validação.\nObrigado pela ajuda!');
+
+                            });
+                            form.addEventListener('reset', () => {
+                                background.remove();
+                            })
+
+                            background.append(form);
+                        }
+                    }
                 };
             });
         }

@@ -88,7 +88,6 @@
     display: flex;
     justify-content: space-between;
     padding: 5px;
-    z-index: 1;
     height: 36px;
 }
 
@@ -372,13 +371,14 @@
     justify-self: flex-end;
     margin-left: 10px;
     transition: all 0.2s ease-in-out;
-    color:#4e5e1f;
+    color: #4e5e1f;
 }
 
 .userButton-div img {
     height: 50px;
     aspect-ratio: 1/1;
     border-radius: 50%;
+    margin-top: 6px;
 }
 
 .userButton-div a {
@@ -389,7 +389,7 @@
     padding: 2px 6px;
     border-radius: 5px;
     width: 75%;
-    margin-top: 14px;
+    margin: auto 0 6px 0;
     text-align: center;
     text-decoration: none;
 }
@@ -398,10 +398,13 @@
     width: 80%;
     display: flex;
     justify-content: space-between;
+    align-items: center;
     margin-top: 10px;
 }
 
-.userButton-div div i, #editIcon {
+.userButton-div div i,
+#editIcon,
+.userButton-div div label {
     background-color: #4e572a;
     color: white;
     font-size: 18px;
@@ -412,6 +415,45 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
+}
+
+.editToggle {
+    width: 100% !important;
+    height: 14px;
+    background-color: white !important;
+    border-radius: 10px !important;
+    position: absolute;
+    bottom: 0;
+    padding: 0 !important;
+    transition: 0.5s cubic-bezier(0, 1, 1, 1);
+    opacity: 0;
+}
+
+.editToggle::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    height: 110%;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    background-color: #4e572a;
+    transition: 0.5s;
+}
+
+#checkEdit:checked+.editToggle {
+    background-color: #4e572a !important;
+}
+
+#checkEdit:checked+.editToggle::before {
+    background-color: white;
+    transform: translateX(120%);
+}
+
+.userInteractionsButtons .fa-pen-to-square:hover~.editToggle {
+    transform: translateY(130%);
+    opacity: 1;
+    ;
 }
 
 .fa-crosshairs {
@@ -431,9 +473,12 @@
 }
 
 .fa-crosshairs:hover,
+#editIcon:hover,
 #getLocationB:hover,
 .userButton-div button:hover,
-.userButton-div a:hover {
+.userButton-div a:hover,
+.userButton-div div i:hover,
+.fa-pen-to-square:hover {
     transform: scale(1.1);
     transition: all 0.2s ease-out;
 }
@@ -676,6 +721,40 @@
     color: white;
     transform: scale(1.2);
     transition: all 0.2s;
+}
+
+/* Formulário de Edição */
+
+.editForm {
+    background-color: white;
+    padding: 4px 8px;
+    width: 500px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.editForm label {
+    margin-top: 10px;
+    font-weight: 500;
+    color: #4e572a;
+}
+
+.editForm input {
+    padding: 2px 4px;
+    outline: none;
+}
+
+.editForm div {
+    align-self: flex-end;
+    margin-top: 10px;
+}
+
+.editForm div input {
+    padding: 4px 6px;
+    border-radius: 10px;
+    margin-left: 10px;
+    cursor: pointer;
 }
 
 @media screen and (max-width: 600px) {}

@@ -1,17 +1,41 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../styles/dashboard.css">
+    <script src="https://kit.fontawesome.com/d4228d7768.js" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/read-excel-file@5.x/bundle/read-excel-file.min.js"></script>
     <title>DashBoard</title>
 </head>
-<body id="body">
-    <script>
-        const classes = JSON.parse('<%- JSON.stringify(classes) %>');
-        const events = JSON.parse('<%- JSON.stringify(events) %>');
-        const locations = JSON.parse('<%- JSON.stringify(locations) %>');
-    </script>
+
+<body style="display: flex;">
+    <div class="sidebar"
+        style="background-color: #003800; width: 300px; color: white; height: 100vh; max-height: 100vh; padding: 0 10px;">
+        <div class="header"
+            style="display: flex; align-items: center; justify-content: center; flex-direction: column; border-bottom: #86a138 solid 2px; margin-top: 10px;">
+            <h2 style="letter-spacing: 2px;">UFOPA MAPS</h2>
+            <h3 style="letter-spacing: 6px; margin-bottom: 10px;">DASHBOARD</h3>
+        </div>
+        <ul class="sb-ul">
+            <h5 style="color: #86a138; font-weight: 300; letter-spacing: 4px; margin: 5px 0;"></i>DATA BASE</h5>
+            <li id="classesLi"><i class="fa-solid fa-graduation-cap"></i>Classes</li>
+            <li id="eventsLi"><i class="fa-solid fa-calendar-day"></i>Events</li>
+            <li id="locationsLi"><i class="fa-solid fa-map-location-dot"></i>Locations</li>
+        </ul>
+        <ul class="sb-ul">
+            <h5 style="color: #86a138; font-weight: 300; letter-spacing: 4px; margin: 5px 0;"></i>EDIT REQUESTS</h5>
+            <li><i class="fa-solid fa-graduation-cap"></i>Classes</li>
+            <li id="events-requestLi"><i class="fa-solid fa-calendar-day"></i>Events</li>
+            <li><i class="fa-solid fa-map-location-dot"></i>Locations</li>
+        </ul>
+
+    </div>
+    <div id="main" style="display: flex; justify-content: center; max-height: 100vh; overflow-y: scroll; flex: 1">
+    </div>
+    
     <script type="module" src="../scripts/dashboard.js"></script>
 </body>
+
 </html>

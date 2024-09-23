@@ -6,14 +6,16 @@ import { configDotenv } from 'dotenv';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 
+const app = express();
+
 import homeRouter from './routes/home.route.js';
 import authRouter from './routes/auth.route.js';
 import dashBoardRouter from './routes/dashboard.route.js';
 import registerRouter from './routes/register.route.js';
+import apiRouter from './routes/api.route.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-const app = express();
 
 configDotenv();
 
@@ -44,6 +46,7 @@ app.use(homeRouter);
 app.use(authRouter);
 app.use(dashBoardRouter);
 app.use(registerRouter);
+app.use(apiRouter);
 
 app.listen(process.env.PORT || 3000, () => {
     console.log('Site no ar.');
