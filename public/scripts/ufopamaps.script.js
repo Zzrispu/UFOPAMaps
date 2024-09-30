@@ -157,7 +157,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (user.username === 'Guest') {
             div.innerHTML = `<img src="https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg" alt="userPicture">` +
                 `<h4>${user.username}</h4>` +
-                `<a href="/login" style="margin-top: 10px">Entar</a>` +
+                `<a href="/login" style="margin-top: 10px">Entrar</a>` +
                 `<a href="/register" style="margin-top: 10px">Cadastrar</a>`;
         }
         else {
