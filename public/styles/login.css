@@ -132,6 +132,10 @@ form button {
         width: 100vw;
     }
 
+    .formulario {
+        width: 90%;
+    }
+    
     .ufopamaps_bg {
         display: none;
     }
