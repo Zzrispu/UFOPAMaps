@@ -143,3 +143,15 @@ form button {
         display: none;
     }
 }
+
+@media screen and (orientation: landscape) and (max-height: 600px) {
+    .left-side {
+        width: 100%;
+    }
+    .formulario {
+        width: 80%;
+    }
+    .ufopamaps_bg {
+        display: none;
+    }
+}
