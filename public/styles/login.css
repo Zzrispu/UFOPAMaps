@@ -126,3 +126,13 @@ form button {
     padding: 5px;
     height: 35px;
 }
+
+@media screen and (max-width: 600px) {
+    .left-side {
+        width: 100vw;
+    }
+
+    .ufopamaps_bg {
+        display: none;
+    }
+}
